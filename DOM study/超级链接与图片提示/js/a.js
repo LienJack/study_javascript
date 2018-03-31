@@ -19,9 +19,18 @@ $(function(){
 	);
 	
 	$("a.tooltip").mouseout(
-		function(){
+		function(e){
 			console.log("mouseout");
 			this.title=this.myTitle;
+			$("#tooltip").remove();
+			
 		}
 	);
+	
+	$("a.tooltip").mousemove(function(e){
+		$("#tooltip").css({
+			"top":(e.pageY+y)+"px",
+			"left":(e.pageX +x)+"px"
+		});
+	});
 });
