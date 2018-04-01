@@ -1,0 +1,85 @@
+*{margin: 0;padding: 0;}
+body{ background-color: #3A3A3A; }
+#main{
+	position: absolute;
+	width: 200px;
+	left: 50%;
+	margin-left: -100px;
+	top:200px;
+	text-align: center;
+	}
+
+#main button{
+	width: 100px;
+	height: 60px;
+	border: 1px solid #bfbfbf;
+	cursor:pointer;
+	border-radius: 5px;
+	color: #00000;
+	font-size: 16px;
+	margin-bottom: 30px;
+	}
+
+.simpleAlert{position: fixed;z-index: 1000;}
+
+.simpleAlertShelter{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	background-color: #000;
+	opacity: 0.8;
+	}
+	
+.simpleAlertBody{
+	position:fixed;
+	display: block;
+	width: 476px;
+	height: 216px;
+	top:50%;
+	left:50%;
+	margin:-188px 0 0 -238px;
+	opacity:1;
+	border: 1px solid #948497;
+	background-color: #fff;
+	}
+	
+.simpleAlertBodyClose{
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	top:10px;
+	right: 10px;
+	padding: 5px;
+	cursor: pointer;
+	}
+	
+.simpleAlertBodyContent{
+	position: absolute;
+	top:30%;
+	width:96%;
+	height:48px;
+	overflow-y:auto;
+	left: 2%;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+	}
+	
+.simpleAlertBtn{
+	position:absolute;
+	width: 70px;
+	height: 34px;
+	top:60%;
+	border: 1px solid #bfbfbf;
+	cursor:pointer;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 16px;
+	}
+	
+.simpleAlertBtn1{background-color: #826289;left: 25%;}
+.simpleAlertBtn2{background-color: #f7f7f7;color: #333;right: 25%;}
+.onlyOne{width: 200px;height: 36px;left: 138px;}
