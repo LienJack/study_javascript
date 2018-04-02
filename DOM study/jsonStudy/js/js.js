@@ -9009,20 +9009,30 @@ for (i = 0; i < 16; i++) {
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');//生成A-Z
 var GroupBySpell = data.sort(SpellAsc);
 
-for(j in data){
-  for(k in letters){
-    
-  }
+function groupByLetter(letters,data){
+	var cityObj={};
+	for(var i=0;i<letters.length;i++){
+		for(var j=0;j<data.length;j++){
+			if(data[j].spell.slice(0,1)==letters[i]){
+//				if(cityObj[letters[i]]){
+//				  cityObj[letters[i]].push(data[j].name);
+//				}
+//				else{
+//					cityObj[letters[i]]=data[j].name;
+//				}
+				cityObj[letters[i]]=data[j].name;
+			}
+		}
+	}
+return cityObj;
 }
-
-
-
+var cityObj=groupByLetter(letters,data);
 
 
 
 $(function(){
- 
-  console.log(letters);
+  console.log(cityObj);
 
 })
 
+//https://www.jianshu.com/p/de417e1b5d1b
