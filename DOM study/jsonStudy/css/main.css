@@ -1,0 +1,38 @@
+/* css reset */
+*{padding: 0;margin: 0px}
+ul,li{list-style: none;}
+
+#wrap{
+  width: 600px;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  margin: 0 auto;
+}
+
+
+#hotCity ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+#hotCity ul li{
+  width: 130px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #000000;
+  line-height: 40px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+#groupByChar .grouByCity{
+  margin-bottom: 10px;
+}
+
+#groupByChar ul li{
+    line-height: 30px;
+    border-bottom: 1px solid gray;
+}
