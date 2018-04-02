@@ -1,5 +1,6 @@
 *{margin: 0;padding: 0;}
 body{ background-color: #3A3A3A; }
+ul,li{    list-style-type:none}
 #main{
 	position: absolute;
 	width: 200px;
