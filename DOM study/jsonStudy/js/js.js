@@ -8991,20 +8991,23 @@ var data=[
       "hot": 0
     }
   ];
-var HotCityDesc = function (x, y) {
+var HOtDesc = function (x, y) {
   return (x["hot"] < y["hot"]) ? 1 : -1
 }
-var CityNameAsc = function (x, y) {
-  return (x["spell"] < y["spell"]) ? 1 : -1
+
+var SpellAsc = function (x, y) {
+  return (x["spell"] > y["spell"]) ? 1 : -1
 }
 
-var AllhotCity = data.sort(HotCityDesc);
+//hot排序
+var AllhotCity = data.sort(HOtDesc);
 var TopHotCity = [];
 for (i = 0; i < 16; i++) {
   TopHotCity[i] = AllhotCity[i].name;
 }
 
-var GroupBySpell = data.sort(CityNameAsc);
+var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');//生成A-Z
+var GroupBySpell = data.sort(SpellAsc);
 
 
 
@@ -9014,8 +9017,7 @@ var GroupBySpell = data.sort(CityNameAsc);
 
 $(function(){
  
-  console.log(TopHotCity);
-  console.log(GroupBySpell);
+  console.log(letters);
 
 })
 
