@@ -1,28 +1,10 @@
 var myConfirm=function(context,callback,config){
-//设置默认参数
-//if(!config){
-//	var setting={
-//  cancelText:"取消",
-//  confirmText:"确定"
-//	};
-//}
-//else{
-//	var setting={
-//	cancelText:config.cancelText,
-//  confirmText:config.confirmText
-// };
-//}
+
   config = {
   	cancelText: config && config.cancelText || "取消",
   	confirmText: config && config.confirmText || "确定",
   }
-//var setting={};//这个是按钮显示对象
-////这个是默认
-//var def={
-//  cancelText:"取消",
-//  confirmText:"确定"
-//};
-//setting=config||def;//进行选择
+
   console.log(config);
   var $simpleAlert = $('<div class="simpleAlert">');//wrap容器
   var $shelter = $('<div class="simpleAlertShelter">');//这是遮罩
