@@ -9009,6 +9009,11 @@ for (i = 0; i < 16; i++) {
 var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');//生成A-Z
 var GroupBySpell = data.sort(SpellAsc);
 
+for(j in data){
+  for(k in letters){
+    
+  }
+}
 
 
 
