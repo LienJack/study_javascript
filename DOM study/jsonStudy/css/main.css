@@ -1,38 +1,56 @@
 /* css reset */
-*{padding: 0;margin: 0px}
+*{padding: 0;margin: 0px;font-family:"微软雅黑";}
 ul,li{list-style: none;}
-
+body{background-color: rgb(207, 206, 206)}
 #wrap{
   width: 600px;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
   margin: 0 auto;
+  background: white;
 }
 
+
+h3{
+  font-size:15px;
+  color: grey;
+  padding-left: 10px;
+  line-height: 20px;
+}
+
+#hotCity h3{padding-top: 20px;}
 
 #hotCity ul{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 
 #hotCity ul li{
-  width: 130px;
-  height: 40px;
+  width: 128px;
+  height: 38px;
   text-align: center;
-  border: 1px solid #000000;
+  border: 1px solid #dbdbdb;
   line-height: 40px;
-  margin-bottom: 20px;
+  margin:5px 10px;
   border-radius: 15px;
 }
 
 #groupByChar .grouByCity{
   margin-bottom: 10px;
 }
+#groupByChar h3{
+  margin-top: 10px;
+}
 
 #groupByChar ul li{
-    line-height: 30px;
-    border-bottom: 1px solid gray;
+    line-height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.light{
+  color: green;
+  border-color: green;
 }
