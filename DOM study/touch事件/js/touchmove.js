@@ -1,58 +1,56 @@
 var startx, starty, movex, movey, endx, endy, totalx, totaly, angle;//touch用的变量
-var page = 1;
-var $parent = $("span.next").parents("div.v_show");
-var $v_show = $parent.find("div.v_content_list");
-var $v_content = $parent.find("div.v_content");
-var v_width = $parent.width();
-var len = $v_show.find("li").length;
-var page_count = 4;
+var page = 1;//初始页
+var page_count = 4;//页数
+var $wrap=$(".wrap");
+var $wrapUl = $(".wrap ul");//捕获要移动的元素
+var v_width=$wrap.width();//移动位置
+$wrapLi=$(".wrap li");
+//下一页
 var NextPage = function () {
-	if (!$v_show.is(":animated")) {
+	if (!$wrapUl.is(":animated")) {
 		if (page == page_count) {
-			$v_show.animate({ left: '0px' }, "slow");
+			$wrapUl.animate({ left: '0px' }, "slow");
 			page = 1;
 		}
 		else {
-			$v_show.animate({ left: '-=' + v_width }, "slow");
+			$wrapUl.animate({ left: '-=' + v_width }, "slow");
 			page++;
 		}
-		$parent.find("span").eq((page - 1)).addClass("current")
-			.siblings().removeClass("current");
 	}
 }
-
+//上一页
 var PrevPage=function(){
-	if (!$v_show.is(":animated")) {
+	if (!$wrapUl.is(":animated")) {
 		if (page == 1) {
-			$v_show.animate({ left: '-=' + v_width * (page_count - 1) }, "slow");
+			$wrapUl.animate({ left: '-=' + v_width * (page_count - 1) }, "slow");
 			page = page_count;
 		}
 		else {
-			$v_show.animate({ left: '+=' + v_width }, "slow");
+			$wrapUl.animate({ left: '+=' + v_width }, "slow");
 			page--;
 		}
-		$parent.find("span").eq((page - 1)).addClass("current")
-			     .siblings().removeClass("current");
 	}
-}
+} 
+//touch事件
 var  touchs=function(event){
 	if (event.type == "touchstart") {
 		console.log('开始');
 		var touch = event.touches[0];
 		startx = Math.floor(touch.pageX);
 		starty = Math.floor(touch.pageY);
+		startPostion = $wrapUl.position().left;
 	}
 	else if (event.type == "touchmove") {
 		var touch = event.touches[0];
 		movex = Math.floor(touch.pageX);
 		movey = Math.floor(touch.pageY);
-		touchMoveX=movex-startx;
+		touchMoveX=movex-startx;//手指移动x距离
 		touchMoveY=movey-starty;
-		console.log(touchMoveX);
-	/* 	if(touchMoveX==0){
-			var v_showX = $(".test").position().top;
-			x = x + x
-		} */
+    //鼠标跟随移动
+		if (touchMoveX!=0){
+			$wrapUl.css("left", touchMoveX + startPostion);
+		}
+
 	}
 	else if (event.type == "touchend" || event.type == "touchcancel") {
 		endx = Math.floor(event.changedTouches[0].pageX);
@@ -62,12 +60,24 @@ var  touchs=function(event){
 		totaly = endy - starty;
 
 		angle = Math.atan2(totaly, totalx) * 180 / Math.PI;
-		if (angle < 45 && angle >= -45) {
-			console.log('右滑动');
-			NextPage();
+		if (angle < 45 && angle >= -45 && touchMoveX) {
+			//向右滑动
+			if (Math.floor(touchMoveX)>100){
+				$wrapUl.css("left", startPostion);
+				PrevPage();
+			}
+			else {
+				$wrapUl.animate({ left: startPostion }, "slow");
+			}
 		} else if ((angle <= 180 && angle >= 135) || (angle >= -180 && angle < -135)) {
-			console.log('左滑动');
-			PrevPage();
+			//向左边滑动
+			if (Math.floor(touchMoveX) <-100){
+				$wrapUl.css("left", startPostion);
+				NextPage();
+				}
+			else{
+				$wrapUl.animate({ left: startPostion }, "slow" );	
+			}
 		} 
 	}
 }
@@ -75,20 +85,11 @@ var  touchs=function(event){
 
 
 $(function () {	
- 	$("span.next").click(function(){
-		NextPage();
-	});
-	
-	$("span.prev").click(function(){
-		PrevPage();
-	}); 
-	var $pic = $(".v_content_list li");
-	$pic.each(function(){
+	$wrapLi.each(function(){
 		this.addEventListener('touchstart', touchs, false);
 		this.addEventListener('touchmove', touchs, false);
 		this.addEventListener('touchend', touchs, false);
 	});
-	console.log($pic);
 	
 	
 });

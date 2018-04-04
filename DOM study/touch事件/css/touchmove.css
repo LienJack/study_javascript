@@ -1,0 +1,40 @@
+*{margin: 0;padding: 0;}
+ul li{list-style-type: none;}
+.wrap{
+  width: 667px;
+  height: 378px;
+  overflow: hidden;
+
+}
+.wrap ul{
+  width: 2668px;
+  display:inline-block;
+  position: relative;
+}
+.wrap li{
+ display: inline-block;
+ width: 667px;
+ height:375px;
+ float: left;
+}
+
+.wrap li h1{
+  text-align: center;
+  margin: 150px 0;
+}
+
+.photo1{
+  background-color: firebrick;
+}
+
+.photo2{
+  background-color: rgb(34, 178, 46);
+}
+
+.photo3{
+  background-color: rgb(231, 247, 10);
+}
+
+.photo4{
+  background-color: rgb(0, 17, 255);
+}
