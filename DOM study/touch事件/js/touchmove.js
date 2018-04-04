@@ -6,27 +6,35 @@ var $wrapUl = $(".wrap ul");//捕获要移动的元素
 var v_width=$wrap.width();//移动位置
 $wrapLi=$(".wrap li");
 //下一页
-var NextPage = function () {
+var NextPage = function (startPostion,totalx) {
+	var startPostion=this.startPostion;//初始位置
+	var totalx=this.totalx;//手部一共移动的位置
+	var moveTo = (v_width + totalx);
 	if (!$wrapUl.is(":animated")) {
 		if (page == page_count) {
 			$wrapUl.animate({ left: '0px' }, "slow");
 			page = 1;
 		}
 		else {
-			$wrapUl.animate({ left: '-=' + v_width }, "slow");
+			$wrapUl.css("left", startPostion+totalx);
+			$wrapUl.animate({ left: '-=' + moveTo}, "slow");
 			page++;
 		}
 	}
 }
 //上一页
-var PrevPage=function(){
+var PrevPage = function (startPostion, totalx){
+	var startPostion = this.startPostion;
+	var totalx = this.totalx;
+	var moveTo = (v_width - totalx);
 	if (!$wrapUl.is(":animated")) {
 		if (page == 1) {
-			$wrapUl.animate({ left: '-=' + v_width * (page_count - 1) }, "slow");
+			$wrapUl.animate({ left: '-=' + (v_width * (page_count - 1) + totalx)}, "slow");
 			page = page_count;
 		}
 		else {
-			$wrapUl.animate({ left: '+=' + v_width }, "slow");
+			$wrapUl.css("left", startPostion+totalx);
+			$wrapUl.animate({ left: '+=' + moveTo }, "slow");
 			page--;
 		}
 	}
@@ -34,11 +42,13 @@ var PrevPage=function(){
 //touch事件
 var  touchs=function(event){
 	if (event.type == "touchstart") {
-		console.log('开始');
 		var touch = event.touches[0];
 		startx = Math.floor(touch.pageX);
 		starty = Math.floor(touch.pageY);
-		startPostion = $wrapUl.position().left;
+		startPostion = Math.floor($wrapUl.position().left);
+		startPostion = (parseInt(startPostion / v_width)) * v_width;//强行对齐
+		console.log('startPostion:' + startPostion+"page:"+page);
+		
 	}
 	else if (event.type == "touchmove") {
 		var touch = event.touches[0];
@@ -61,22 +71,24 @@ var  touchs=function(event){
 
 		angle = Math.atan2(totaly, totalx) * 180 / Math.PI;
 		if (angle < 45 && angle >= -45 && touchMoveX) {
-			//向右滑动
+			//手指向右滑动
 			if (Math.floor(touchMoveX)>100){
-				$wrapUl.css("left", startPostion);
-				PrevPage();
+				PrevPage(startPostion, totalx);
 			}
 			else {
-				$wrapUl.animate({ left: startPostion }, "slow");
+				if (!$wrapUl.is(":animated")) {
+					$wrapUl.animate({ left: startPostion }, "slow");
+				}
 			}
 		} else if ((angle <= 180 && angle >= 135) || (angle >= -180 && angle < -135)) {
-			//向左边滑动
-			if (Math.floor(touchMoveX) <-100){
-				$wrapUl.css("left", startPostion);
-				NextPage();
+			//手指向左边滑动
+			if (Math.floor(touchMoveX)<(-100)){
+				NextPage(startPostion, totalx);
 				}
 			else{
-				$wrapUl.animate({ left: startPostion }, "slow" );	
+				if (!$wrapUl.is(":animated")) {
+						$wrapUl.animate({ left: startPostion }, "slow" );	
+				}
 			}
 		} 
 	}
