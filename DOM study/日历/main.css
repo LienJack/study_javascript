@@ -1,20 +1,79 @@
 /* css reset */
 
-*{padding: 0;margin: 0px;}
+*{ 
+  margin: 0px; 
+  padding: 0px; 
+ } 
 
-.wrap{
-  width: 667px;
-  height: 375px;
-}
-.top{height: 40px;}
-
-.wrap table {
- margin: 0 53px;
- text-align: center;
-}
-
-.wrap table  td{
+ ul,li{list-style: none;}
+ #data{ 
+  width: 665px; 
+  border: 1px solid #000000; 
+  margin: 0 auto;
+ } 
+ #data > p{ 
+  display: flex; 
+ } 
+ #data > h5{ 
+  text-align: center; 
+ } 
+ #data > p > span{ 
+  padding: 0 10px; 
+ } 
+ #prev,#next{ 
+  cursor: pointer; 
+ } 
+ #year{ 
+  flex: 1; 
+  text-align: center; 
+ } 
+ #title{ 
+  overflow: hidden; 
+  list-style: none; 
+  background: #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap; 
+ } 
+ #title > li{ 
+  width: 14%; 
+  height: 26px; 
+  line-height: 26px; 
+  text-align: center; 
+ } 
+ #date{ 
+  overflow: hidden; 
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  flex-wrap: wrap; 
+ } 
+ #date  li{ 
+  display: block;
+  width: 14%;
+  height: 40px;   
+  line-height: 40px; 
+  text-align: center; 
+  cursor: pointer; 
+  margin-top: 10px;
+ } 
+#date li p{
   width: 40px;
-  height: 30px;
-  padding: 10px 20px;
+  height: 40px;
+  display: block;
+  margin: auto;
 }
+
+ .active p{ 
+  color: white;
+  background: green;
+  border: 1px solid green;
+  border-radius: 50%;
+ } 
+
+ .not{
+   color: rgb(194, 194, 194);
+ }
+
