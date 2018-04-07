@@ -5,14 +5,13 @@ var myConfirm=function(context,callback,config){
   	confirmText: config && config.confirmText || "确定",
   }
 
-  console.log(config);
   var $simpleAlert = $('<div class="simpleAlert">');//wrap容器
   var $shelter = $('<div class="simpleAlertShelter">');//这是遮罩
   var $simpleAlertBody = $('<div class="simpleAlertBody">');//弹窗容器
   var $simpleAlertBodyClose = $('<img class="simpleAlertBodyClose" src="img/close.png" height="14" width="14"/>');
   var $simpleAlertBodyContent = $('<p class="simpleAlertBodyContent">' +context+ '</p>');//内容
-  var $btn1 = $('<button class="simpleAlertBtn simpleAlertBtn1">'+setting.confirmText+'</button>');//按钮1
-  var $btn2 = $('<button class="simpleAlertBtn simpleAlertBtn2">'+setting.cancelText+'</button>');//按钮2
+  var $btn1 = $('<button class="simpleAlertBtn simpleAlertBtn1">'+config.confirmText+'</button>');//按钮1
+  var $btn2 = $('<button class="simpleAlertBtn simpleAlertBtn2">'+config.cancelText+'</button>');//按钮2
   $simpleAlertBody.append($simpleAlertBodyClose)
 				.append($simpleAlertBodyContent)
 				.append($btn1)
@@ -26,16 +25,16 @@ var myConfirm=function(context,callback,config){
 	$(".simpleAlert").remove();	
   });
 
-$(".simpleAlertBtn2").click(function(){
+  $(".simpleAlertBtn2").click(function(){
 	callback(false);
 	$(".simpleAlert").remove();
   });
 
-$(".simpleAlertBodyClose").click(function(){
+  $(".simpleAlertBodyClose").click(function(){
 	$(".simpleAlert").remove();
   });
 
-$(".simpleAlertShelter").click(function(){
+  $(".simpleAlertShelter").click(function(){
 	$(".simpleAlert").remove();
   });
 		

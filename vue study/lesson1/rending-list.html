@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.completed{
+				text-decoration: line-through;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<task-app :list="tasks">
+				
+			</task-app>
+			
+		</div>
+		<template id="task-template">
+			<ul>
+				<li @click="toggleTasks(task)" 
+					:class="{'completed':task.completed}" 
+					v-for="task in list">
+					{{task.body}}
+				</li>
+			</ul>
+		</template>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			Vue.component('task-app',{
+				template:'#task-tempalte',
+				props:[list]
+			});
+			
+			new Vue({
+				el:"#app",
+				data:{
+					completed:"something",
+					tasks:[
+						{body:"go to the movie",completed:false},
+						{body:"learn vue js in action",completed:true},
+						{body:"go to the shop",completed:false}
+					]
+				},
+				methods:{
+					toggleTasks:function(task){
+						task.completed=!task.completed;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

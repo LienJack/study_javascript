@@ -1,5 +1,3 @@
-
-
 var data=[
     {
       "id": 0,
@@ -8991,6 +8989,8 @@ var data=[
       "hot": 0
     }
   ];
+  
+
 var HOtDesc = function (x, y) {
   return (x["hot"] < y["hot"]) ? 1 : -1
 }
@@ -9021,7 +9021,7 @@ for(var i=0;i<letters.length;i++){
   cityArr.push(new CityObj(letters[i]));
 }
 var CityFristletter=[];//保存城市拼音首字母
-//开始遍历
+//开始遍历,先城市首字母遍历，然后城市遍历
 for(var i=0;i<cityArr.length;i++){
   for (var j = 0; j < data.length; j++) {
     CityFristletter[j]=data[j].spell.slice(0, 1);
@@ -9056,11 +9056,7 @@ $(function(){
          $(".grouByCity>ul").eq(i).append('<li>' + cityArr[i].cityList[j] + '</li>');
          
       } 
-  }
-  console.log($(".grouByCity"));
-
-
-  
+  }  
 })
 
 
