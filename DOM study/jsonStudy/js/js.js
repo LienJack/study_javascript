@@ -8991,7 +8991,7 @@ var data=[
   ];
   
 
-var HOtDesc = function (x, y) {
+var HOtDesc = function ( x, y) {
   return (x["hot"] < y["hot"]) ? 1 : -1
 }
 
@@ -8999,33 +8999,33 @@ var SpellAsc = function (x, y) {
   return (x["spell"] > y["spell"]) ? 1 : -1
 }
 
-//hot排序
+// hotcity排序
 var AllhotCity = data.sort(HOtDesc);
 var TopHotCity = [];
-//选出前16个hot城市
+// 选出前16个hot城市
 for (i = 0; i < 16; i++) {
   TopHotCity[i] = AllhotCity[i].name;
 }
 
 
 var GroupBySpell = data.sort(SpellAsc);
-var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');//生成A-Z
+var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); // 生成A-Z数组
 
-var cityArr=[];//这是一个包含城市对象的数组
+var cityArr=[]; // 这是一个包含城市对象的数组
 function CityObj(letters) {
   this.letters=letters;
   this.cityList=[];
 }
-//构造数据结构
-for(var i=0;i<letters.length;i++){
+// 构造数据结构
+for(var i = 0; i < letters.length; i++){
   cityArr.push(new CityObj(letters[i]));
 }
-var CityFristletter=[];//保存城市拼音首字母
-//开始遍历,先城市首字母遍历，然后城市遍历
-for(var i=0;i<cityArr.length;i++){
+var CityFristletter=[];// 保存城市拼音首字母
+// 开始遍历,先城市首字母遍历，然后城市遍历
+for(var i = 0; i< cityArr.length; i++){
   for (var j = 0; j < data.length; j++) {
-    CityFristletter[j]=data[j].spell.slice(0, 1);
-    if (CityFristletter[j]==cityArr[i].letters){
+    CityFristletter[j] = data[j].spell.slice(0, 1);
+    if (CityFristletter[j] === cityArr[i].letters){
       cityArr[i].cityList.push(data[j].name);
     }
   }
@@ -9033,8 +9033,6 @@ for(var i=0;i<cityArr.length;i++){
 
 
 $(function(){
-  //console.log(CityObj);
-  
   $hotCity =$('<div id="hotCity">');
   $hotCityH3 = $('<h3>热门城市</h3>');
   $hotCityUl=$('<ul class="hotCityUl">');
@@ -9044,17 +9042,16 @@ $(function(){
   $hotCity.append($hotCityH3).append($hotCityUl);
   $groupByChar.append($grouByCityUl);
   $("#wrap").append($hotCity).append($groupByChar);
-  //热门城市
+  // 热门城市
   for (var i = 0; i < TopHotCity.length;i++){
     $hotCityUl.append('<li>' + TopHotCity[i] + '</li>').append($grouByCityUl);
   }
-//拼音分组
+// 拼音分组
   for(var i=0;i<cityArr.length;i++){
     $groupByChar.append($grouByCity);
     ($grouByCity).append('<h3>' + cityArr[i].letters + '</h3>').append('<ul>');
        for(var j=0;j<cityArr[i].cityList.length;j++){ 
-         $(".grouByCity>ul").eq(i).append('<li>' + cityArr[i].cityList[j] + '</li>');
-         
+         $(".grouByCity>ul").eq(i).append('<li>' + cityArr[i].cityList[j] + '</li>');  
       } 
   }  
 })
