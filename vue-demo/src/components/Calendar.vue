@@ -16,7 +16,7 @@
       <li>六</li>
     </ul> 
     <ul class="date">
-       
+       <li v-for="n in 30">{{ n }}</li>
     </ul>
   </div>
   
