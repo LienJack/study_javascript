@@ -1,7 +1,7 @@
 <template>
    <div class = "data"> 
     <p> 
-     <span class = "prev">上一月</span> 
+     <span class = "prev"@click='pre()'>上一月</span> 
      <span class = "year">{{currentYear}}年</span> 
      <span class = "next" @click="next()">下一月</span> 
     </p> 
@@ -16,7 +16,7 @@
      <li>六</li>
     </ul> 
     <ul class= "date"> 
-      <li v-for="day in days" :class="{'active':day.isMonth}"><p>{{day.dayNum}}</p></li>
+      <li v-for="day in days" ><p :class="{'active':day.isMonth,'today':day.isCurrent}">{{day.dayNum}}</p></li>
     </ul> 
   </div> 
 </template>
@@ -37,13 +37,12 @@ export default {
     initDate () {
       // 今天的
       var nowDate = new Date(); // 今天时间
-      var nowDateNum=nowDate.getDate(); //
+      var nowDateNum = nowDate.getDate(); //今天的日期号
       var nowYear = nowDate.getFullYear(); // 今天年份
       var nowMonth = nowDate.getMonth(); // 今天月份
       // 设置的当前日期
-      var date=this.currentDate; // 设置的当前日期
-      //this.currentMonth = date.getMonth(); // 设置的当前月份
-      this.currentMonth = date.getMonth()+1; // 设置的当前月份
+      var date = this.currentDate; // 设置的当前日期
+      this.currentMonth = date.getMonth(); // 设置的当前月份
       this.currentYear = date.getFullYear(); // 设置的当前年份
       this.currentDay =date.getDate(); //设置的当前日期号
       
@@ -64,7 +63,7 @@ export default {
       for(let i = 0; i < fristDayWeedkay; i++){
         let dayObject={};
         dayObject.dayNum=showLastMonth+i;
-        //dayObject.isCurrent=false;
+        dayObject.isCurrent=false;
         dayObject.isMonth=false;
         this.days.push(dayObject);
       }
@@ -74,7 +73,12 @@ export default {
       for(let i = 1; i <= lastDayNum; i++){
         let dayObject={};
         dayObject.dayNum=i;
-        //dayObject.isCurrent=true;
+        if(i === nowDateNum && nowMonth === this.currentMonth && nowYear === this.currentYear){
+          dayObject.isCurrent=true;
+        }
+        else{
+          dayObject.isCurrent=false;
+        }
         dayObject.isMonth=true;
         this.days.push(dayObject);
       }
@@ -82,13 +86,20 @@ export default {
       for(let i =1; i <= showNextMonth; i++){
         let dayObject={};
         dayObject.dayNum=i;
-        //dayObject.isCurrent=false;
+        dayObject.isCurrent=false;
         dayObject.isMonth=false;
         this.days.push(dayObject);
       }
     },
     next:function(){
-        
+      this.days=[];
+      this.currentDate.setMonth(this.currentDate.getMonth()+1);
+      this.initDate();
+    },
+    pre:function(){
+      this.days=[];
+      this.currentDate.setMonth(this.currentDate.getMonth()-1);
+      this.initDate();
     }
   },
   created(){
@@ -157,14 +168,14 @@ export default {
   cursor: pointer; 
   margin-top: 10px;
  } 
-/* .date li{
+
+.date li{
   color: rgb(194, 194, 194);
-} */
+}
 
 .date li p{
   width: 40px;
   height: 40px;
-  /* color: rgb(194, 194, 194); */
   display: block;
   margin: auto;
 }
@@ -173,7 +184,10 @@ export default {
   color: #000000;
  } 
 
- .not{
-   color: rgb(194, 194, 194);
- }
+.today{
+  border: 1px solid green;
+  border-radius: 50%;
+  background-color: green;
+  color: white;
+}
 </style>
