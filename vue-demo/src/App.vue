@@ -2,10 +2,10 @@
    <div class = "data"> 
     <p> 
      <span class = "prev">上一月</span> 
-     <span class = "year">{{currentYear}}</span> 
-     <span class = "next">下一月</span> 
+     <span class = "year">{{currentYear}}年</span> 
+     <span class = "next" @click="next()">下一月</span> 
     </p> 
-    <h5 class = "month">{{currentMonth}}</h5> 
+    <h5 class = "month">{{currentMonth+1}}月</h5> 
     <ul class = "title"> 
      <li>日</li>
      <li>一</li> 
@@ -16,7 +16,7 @@
      <li>六</li>
     </ul> 
     <ul class= "date"> 
-      <li v-for="day in 30">{{day}}</li>
+      <li v-for="day in days" :class="{'active':day.isMonth}"><p>{{day.dayNum}}</p></li>
     </ul> 
   </div> 
 </template>
@@ -24,12 +24,76 @@
 export default {
   data : function(){
     return{
-      currentDate:9,
-      currentMonth:4,
-      currentYear:2018,
-      currentWeekday:1
+      //初始化日期
+      currentDate:new Date(),
+      currentMonth:5,
+      currentYear:2017,
+      currentDay:1,
+      days:[],
+      preDay:1
     }
   },
+  methods:{
+    initDate () {
+      // 今天的
+      var nowDate = new Date(); // 今天时间
+      var nowDateNum=nowDate.getDate(); //
+      var nowYear = nowDate.getFullYear(); // 今天年份
+      var nowMonth = nowDate.getMonth(); // 今天月份
+      // 设置的当前日期
+      var date=this.currentDate; // 设置的当前日期
+      //this.currentMonth = date.getMonth(); // 设置的当前月份
+      this.currentMonth = date.getMonth()+1; // 设置的当前月份
+      this.currentYear = date.getFullYear(); // 设置的当前年份
+      this.currentDay =date.getDate(); //设置的当前日期号
+      
+      // 需要用到的日期
+      let fristDay = new Date( this.currentYear, this.currentMonth, 1); // 这个月第一天
+      let preDay = new Date( this.currentYear, this.currentMonth, 0); // 上个月最后一天
+      let lastDay = new Date( this.currentYear, this.currentMonth+1, 0);// 这个月最后一天
+      
+      //计算
+      let fristDayWeedkay = fristDay.getDay(); // 这个月第一天的星期数
+      let preDayNum = preDay.getDate(); // 上个月总共多少天
+      let lastDayNum=lastDay.getDate(); // 这个月一共多少天
+      let thisLastWeekday=lastDay.getDay();
+      let showLastMonth = preDayNum - fristDayWeedkay + 1;  // 显示上个月日期的第一日期
+      let showNextMonth = 7 - thisLastWeekday - 1; // 要显示下个月的天数
+
+      // 上个月
+      for(let i = 0; i < fristDayWeedkay; i++){
+        let dayObject={};
+        dayObject.dayNum=showLastMonth+i;
+        //dayObject.isCurrent=false;
+        dayObject.isMonth=false;
+        this.days.push(dayObject);
+      }
+
+      //这个月
+
+      for(let i = 1; i <= lastDayNum; i++){
+        let dayObject={};
+        dayObject.dayNum=i;
+        //dayObject.isCurrent=true;
+        dayObject.isMonth=true;
+        this.days.push(dayObject);
+      }
+
+      for(let i =1; i <= showNextMonth; i++){
+        let dayObject={};
+        dayObject.dayNum=i;
+        //dayObject.isCurrent=false;
+        dayObject.isMonth=false;
+        this.days.push(dayObject);
+      }
+    },
+    next:function(){
+        
+    }
+  },
+  created(){
+    this.initDate();  
+  }
 }
 </script>
 
@@ -93,18 +157,20 @@ export default {
   cursor: pointer; 
   margin-top: 10px;
  } 
+/* .date li{
+  color: rgb(194, 194, 194);
+} */
+
 .date li p{
   width: 40px;
   height: 40px;
+  /* color: rgb(194, 194, 194); */
   display: block;
   margin: auto;
 }
 
- .active p{ 
-  color: white;
-  background: green;
-  border: 1px solid green;
-  border-radius: 50%;
+ .active  { 
+  color: #000000;
  } 
 
  .not{
