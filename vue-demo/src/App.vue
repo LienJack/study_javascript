@@ -1,12 +1,12 @@
 <template>
-   <div class = "data"> 
+   <div class="data"> 
     <p> 
-     <span class = "prev"@click = 'pre()'>上一月</span> 
-     <span class = "year">{{currentYear}}年</span> 
-     <span class = "next" @click = 'next()'>下一月</span> 
+     <span class="prev" @click="pre">上一月</span> 
+     <span class="year">{{currentYear}}年</span> 
+     <span class="next" @click="next">下一月</span> 
     </p> 
-    <h5 class = "month">{{currentMonth+1}}月</h5> 
-    <ul class = "title"> 
+    <h5 class="month">{{currentMonth+1}}月</h5> 
+    <ul class="title"> 
      <li>日</li>
      <li>一</li> 
      <li>二</li> 
@@ -15,8 +15,8 @@
      <li>五</li> 
      <li>六</li>
     </ul> 
-    <ul class= "date"> 
-      <li v-for="day in days" ><p :class="{'active': day.isMonth, 'today' : day.isCurrent}">{{ day.dayNum }}</p></li>
+    <ul class="date"> 
+      <li v-for="(day, index) in days" :key="index"><p :class="{'active': day.isMonth, 'today' : day.isCurrent}">{{ day.dayNum }}</p></li>
     </ul> 
   </div> 
 </template>
@@ -168,7 +168,7 @@ export default {
   justify-content:flex-start;
   flex-wrap: wrap; 
  } 
- 
+
  .date  li{ 
   display: block;
   width: 14%;
