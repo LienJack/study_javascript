@@ -1,9 +1,9 @@
 <template>
    <div class = "data"> 
     <p> 
-     <span class = "prev"@click='pre()'>上一月</span> 
+     <span class = "prev"@click = 'pre()'>上一月</span> 
      <span class = "year">{{currentYear}}年</span> 
-     <span class = "next" @click="next()">下一月</span> 
+     <span class = "next" @click = 'next()'>下一月</span> 
     </p> 
     <h5 class = "month">{{currentMonth+1}}月</h5> 
     <ul class = "title"> 
@@ -16,7 +16,7 @@
      <li>六</li>
     </ul> 
     <ul class= "date"> 
-      <li v-for="day in days" ><p :class="{'active':day.isMonth,'today':day.isCurrent}">{{day.dayNum}}</p></li>
+      <li v-for="day in days" ><p :class="{'active': day.isMonth, 'today' : day.isCurrent}">{{ day.dayNum }}</p></li>
     </ul> 
   </div> 
 </template>
@@ -44,7 +44,7 @@ export default {
       var date = this.currentDate; // 设置的当前日期
       this.currentMonth = date.getMonth(); // 设置的当前月份
       this.currentYear = date.getFullYear(); // 设置的当前年份
-      this.currentDay =date.getDate(); //设置的当前日期号
+      this.currentDay = date.getDate(); // 设置的当前日期号
       
       // 需要用到的日期
       let fristDay = new Date( this.currentYear, this.currentMonth, 1); // 这个月第一天
@@ -54,51 +54,51 @@ export default {
       //计算
       let fristDayWeedkay = fristDay.getDay(); // 这个月第一天的星期数
       let preDayNum = preDay.getDate(); // 上个月总共多少天
-      let lastDayNum=lastDay.getDate(); // 这个月一共多少天
-      let thisLastWeekday=lastDay.getDay();
+      let lastDayNum = lastDay.getDate(); // 这个月一共多少天
+      let thisLastWeekday = lastDay.getDay();
       let showLastMonth = preDayNum - fristDayWeedkay + 1;  // 显示上个月日期的第一日期
       let showNextMonth = 7 - thisLastWeekday - 1; // 要显示下个月的天数
 
       // 上个月
       for(let i = 0; i < fristDayWeedkay; i++){
-        let dayObject={};
-        dayObject.dayNum=showLastMonth+i;
-        dayObject.isCurrent=false;
-        dayObject.isMonth=false;
-        this.days.push(dayObject);
+        let dayObject = {};
+        dayObject.dayNum = showLastMonth + i;
+        dayObject.isCurrent = false;
+        dayObject.isMonth = false;
+        this.days.push( dayObject );
       }
 
       //这个月
-
       for(let i = 1; i <= lastDayNum; i++){
         let dayObject={};
         dayObject.dayNum=i;
         if(i === nowDateNum && nowMonth === this.currentMonth && nowYear === this.currentYear){
-          dayObject.isCurrent=true;
+          dayObject.isCurrent = true;
         }
         else{
-          dayObject.isCurrent=false;
+          dayObject.isCurrent = false;
         }
-        dayObject.isMonth=true;
-        this.days.push(dayObject);
+        dayObject.isMonth = true;
+        this.days.push( dayObject );
       }
 
-      for(let i =1; i <= showNextMonth; i++){
-        let dayObject={};
-        dayObject.dayNum=i;
-        dayObject.isCurrent=false;
-        dayObject.isMonth=false;
-        this.days.push(dayObject);
+      //下个月
+      for(let i = 1; i <= showNextMonth; i++){
+        let dayObject = {};
+        dayObject.dayNum = i;
+        dayObject.isCurrent = false;
+        dayObject.isMonth = false;
+        this.days.push( dayObject );
       }
     },
     next:function(){
-      this.days=[];
-      this.currentDate.setMonth(this.currentDate.getMonth()+1);
+      this.days = [];
+      this.currentDate.setMonth( this.currentDate.getMonth() + 1);
       this.initDate();
     },
     pre:function(){
-      this.days=[];
-      this.currentDate.setMonth(this.currentDate.getMonth()-1);
+      this.days = [];
+      this.currentDate.setMonth( this.currentDate.getMonth() - 1);
       this.initDate();
     }
   },
@@ -115,27 +115,34 @@ export default {
  } 
 
  ul,li{list-style: none;}
+
  .data{ 
   width: 665px; 
   border: 1px solid #000000; 
   margin: 0 auto;
  } 
+
  .data > p{ 
   display: flex; 
  } 
+
  .data > h5{ 
   text-align: center; 
  } 
+
  .data > p > span{ 
   padding: 0 10px; 
  } 
+
  .prev,.next{ 
   cursor: pointer; 
  } 
+
  .year{ 
   flex: 1; 
   text-align: center; 
  } 
+
  .title{ 
   overflow: hidden; 
   list-style: none; 
@@ -145,12 +152,14 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap; 
  } 
+
  .title > li{ 
   width: 14%; 
   height: 26px; 
   line-height: 26px; 
   text-align: center; 
  } 
+
  .date{ 
   overflow: hidden; 
   list-style: none;
@@ -159,6 +168,7 @@ export default {
   justify-content:flex-start;
   flex-wrap: wrap; 
  } 
+ 
  .date  li{ 
   display: block;
   width: 14%;
