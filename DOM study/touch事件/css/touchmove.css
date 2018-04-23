@@ -1,20 +1,22 @@
 *{margin: 0;padding: 0;}
 ul li{list-style-type: none;}
 .wrap{
-  width: 667px;
-  height: 378px;
+  width: 100%;
+  height: 100%;
+  position: relative;
   overflow: hidden;
 
 }
 .wrap ul{
-  width: 2668px;
+  height: 100%;
   display:inline-block;
   position: relative;
 }
 .wrap li{
  display: inline-block;
- width: 667px;
- height:375px;
+ width: 100%;
+ height: 100%;
+ 
  float: left;
 }
 
